@@ -83,20 +83,35 @@ Once a release made on a repository, Travis will trigger the release on the depe
             - openebs/jiva-operator
               - openebs/jiva-csi
 
+The following repositories are under active development and are not yet added into the release process. These needs to be manually tagged on-demand.
+- openebs/api
+- openebs/upgrade
+
 The following repositories currently follow a different release versioning than other components, so these are triggered parallely. 
 - openebs/node-disk-manager
 - openebs/zfs-localpv
 - openebs/Mayastor
-
-The following repositories are under active development and are not yet added into the release process. These needs to be manually tagged on-demand.
-- openebs/api
 - openebs/rawfile-localpv
 - openebs/monitor-pv
 
-Once the release is triggered, Travis build process has to be monitored. Once Travis builds are passed, images are pushed to docker hub and quay.io. Images can be verified by going through docker hub and quay.io. Also the images shouldn't have any critical security vulnerabilities.
-Example:
-https://quay.io/repository/openebs/cstor-pool?tab=tags
-https://hub.docker.com/r/openebs/openebs-k8s-provisioner/tags
+Once the release is triggered, Travis build process has to be monitored. Once Travis builds are passed, images are pushed to docker hub and quay.io. Images can be verified by going through openebs org under [docker hub](https://hub.docker.com/u/openebs) and [quay.io](https://quay.io/organization/openebs). 
+
+You can use the following script to verify that the release images do not have any critical security vulnerabilities.
+```
+git clone https://github.com/openebs/charts
+cd charts
+git checkout gh-pages
+
+cd scripts/release
+
+#openebs-fixed-tags.txt file contains the custom tagged images. Update the file with the appropriate 
+#tags corresponding to the current release.
+
+./scan-images.sh <release-tag>
+#Example: ./scan-images.sh 1.12.0-RC2
+```
+
+Once the images are available, update the [Release E2e tracker issue](https://github.com/openebs/e2e-tests/labels/release-checklist) with the list of tagged images. 
 
 ## E2e Testing on Release Builds
 
