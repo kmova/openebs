@@ -31,21 +31,26 @@ Release branches need to be created for the following repositories:
 - openebs/maya
 - openebs/velero-plugin
 - openebs/cstor-csi
-- openebs/jiva-operator
-- openebs/jiva-csi
 - openebs/api
 - openebs/cstor-operators
 - openebs/upgrade
+- openebs/m-exporter
+- openebs/openebs-k8s-provisioner
+- openebs/dynamic-localpv-provisioner
 
 The following repositories currently follow a custom release version.
 - openebs/node-disk-manager
 - openebs/zfs-localpv
+- openebs/dynamic-nfs-provisioner
 
 The following repositories are under active development and releases are created from master branch.
 - openebs/Mayastor
 - openebs/linux-utils
 - openebs/rawfile-localpv
 - openebs/monitor-pv
+- openebs/jiva-operator
+- openebs/jiva-csi
+- openebs/openebsctl
 
 To verify that release branches are created, you can run the following script:
 
@@ -73,16 +78,17 @@ Once a release made on a repository, Travis will trigger the release on the depe
 - openebs/linux-utils
   - openebs/jiva
   - openebs/cstor
+  - openebs/m-exporter
+  - openebs/dynamic-localpv-provisioner
   - openebs/libcstor
     - openebs/istgt
       - openebs/cstor-operators
       - openebs/external-storage
-        - openebs/maya
-          - openebs/velero-plugin
-          - openebs/cstor-csi
-          - openebs/upgrade
-          - openebs/jiva-operator
-            - openebs/jiva-csi
+        - openebs/openebs-k8s-provisioner
+          - openebs/maya
+            - openebs/velero-plugin
+            - openebs/cstor-csi
+            - openebs/upgrade
 
 The following repositories currently follow a different release versioning than other components, so these are triggered parallely. 
 - openebs/node-disk-manager
@@ -93,6 +99,10 @@ The following repositories are under active development and are not yet added in
 - openebs/api
 - openebs/rawfile-localpv
 - openebs/monitor-pv
+- openebs/jiva-operator
+- openebs/jiva-csi
+- openebs/dynamic-nfs-provisioner
+- openebs/openebsctl
 
 Once the release is triggered, Travis build process has to be monitored. Once Travis builds are passed, images are pushed to docker hub and quay.io. Images can be verified by going through docker hub and quay.io. Also the images shouldn't have any critical security vulnerabilities.
 Example:
